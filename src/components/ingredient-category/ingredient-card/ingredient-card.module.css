@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 272px;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+}
+
+.label {
+  text-align: center;
+}

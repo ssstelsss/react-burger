@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  width: 600px;
+  height: calc(100vh - 150px)
+}
+
+.tabs {
+  display: flex;
+  flex-grow: 1;
+}
+
+.content {
+  overflow-y: scroll;
+}
