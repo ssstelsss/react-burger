@@ -44,7 +44,7 @@ export default function BurgerConstructor () {
 
       <div className={`${styles.confirmBlock} mt-10`}>
         <div className={styles.totalPrice}>
-          <p className='text text_type_digits-medium'>{totalPrice}</p>
+          <p className='text text_type_digits-medium mr-2'>{totalPrice}</p>
           <CurrencyIcon />
         </div>
         <div className="ml-10">
