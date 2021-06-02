@@ -1,23 +1,18 @@
 import React, { useState } from 'react'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientCategory from '../ingredient-category/ingredient-category'
+import PropTypes from 'prop-types'
 import styles from './burger-ingredients.module.css'
 
-const INGEDIENT_TYPES = {
-  bun: 'Булки',
-  sauce: 'Соусы',
-  main: 'Начинки'
-}
+const tabs = ['Булки', 'Соусы', 'Начинки']
 
-const INGEDIENT_TYPES_REFLECT = {
-  'Булки': 'bun',
-  'Соусы': 'sauce',
-  'Начинки': 'main'
-}
+export default function BurgerIngredients ({ data }) {
 
-export default function BurgerIngredients () {
+  const [currentTab, setCurrentTab] = useState(tabs[0])
 
-  const [tab, setTab] = useState('bun')
+  const bunsData = data.filter(el => el.type === 'bun')
+  const sauceData = data.filter(el => el.type === 'sauce')
+  const mainData = data.filter(el => el.type === 'main')
 
   return(
     <div className={`${styles.root} pl-5 pt-10`}>
@@ -28,21 +23,37 @@ export default function BurgerIngredients () {
       </div>
 
       <div className={`${styles.tabs} mt-5`}>
-        {Object.keys(INGEDIENT_TYPES).map(type => {
-          const value = INGEDIENT_TYPES[type]
+        {tabs.map(type => {
           return(
-            <Tab key={type} value={value} active={INGEDIENT_TYPES[tab] === value} onClick={(value) => setTab(INGEDIENT_TYPES_REFLECT[value])}>
-              {value}
+            <Tab key={type} value={type} active={currentTab === type} onClick={(type) => setCurrentTab(type)}>
+              {type}
             </Tab>
           )
         })}
       </div>
 
       <div className={`${styles.content} mt-10`}>
-        <IngredientCategory type='bun'/>
-        <IngredientCategory type='sauce'/>
-        <IngredientCategory type='main'/>
+        <IngredientCategory data={bunsData} titile={'Булки'} />
+        <IngredientCategory data={sauceData} titile={'Соусы'} />
+        <IngredientCategory data={mainData} titile={'Начинки'} />
       </div>
     </div>
   )
+}
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    type: PropTypes.string,
+    proteins: PropTypes.number,
+    fat: PropTypes.number,
+    carbohydrates: PropTypes.number,
+    calories: PropTypes.number,
+    price: PropTypes.number,
+    image: PropTypes.string,
+    image_mobile: PropTypes.string,
+    image_large: PropTypes.string,
+    __v: PropTypes.number
+  }))
 }

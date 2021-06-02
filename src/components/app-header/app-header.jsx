@@ -16,7 +16,7 @@ export default function AppHeader () {
 
   return(
     <header className={styles.root}>
-      <div className={`${styles.content}`}>
+      <nav className={`${styles.content}`}>
         <div className={styles.productOptions}>
           <MenuItem icon={<BurgerIcon/>} isActive={activeItem === ITEMS.constructor} onClick={() => setActiveItem(ITEMS.constructor)}>
             Конструктор
@@ -38,7 +38,7 @@ export default function AppHeader () {
           </MenuItem>
         </div>
       
-      </div>
+      </nav>
     </header>
   )
 }

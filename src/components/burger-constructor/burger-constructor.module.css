@@ -14,6 +14,16 @@
   gap: 10px;
 }
 
+.scrollableList::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollableList::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+.scrollableList::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
 .confirmBlock {
   display: flex;
   flex-direction: row;
