@@ -12,11 +12,10 @@ export default function BurgerConstructor ({ data }) {
   return(
     <div className={`${styles.root} ml-10 mt-25`}>
       <ConstructorItem 
-        type={bun.type}
+        type='top'
         text={bun.name}
         price={bun.price}
         isLocked
-        isDraggable={false}
         thumbnail={bun.image}
       />
       <div className={styles.scrollableList}>
@@ -25,7 +24,6 @@ export default function BurgerConstructor ({ data }) {
             <ConstructorItem 
               key={item._id}
               isDraggable
-              type={item.type}
               text={item.name}
               price={item.price}
               thumbnail={item.image}
@@ -34,11 +32,10 @@ export default function BurgerConstructor ({ data }) {
         )}
       </div>
       <ConstructorItem 
-        type={bun.type}
+        type='bottom'
         text={bun.name}
         price={bun.price}
         isLocked
-        isDraggable={false}
         thumbnail={bun.image}
       />
 

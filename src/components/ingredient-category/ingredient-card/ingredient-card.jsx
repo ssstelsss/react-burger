@@ -1,12 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
+import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './ingredient-card.module.css'
 
-export default function IngredientCard ({ ingredient }) {
+export default function IngredientCard ({ ingredient, count }) {
 
   return(
     <div className={`${styles.root} mt-6`}>
+      {count &&
+        <div className={styles.counter}>
+          <Counter count={count} size='default' />
+        </div>
+      }
       <div className={`${styles.image} ml-4 mr-4`}>
         <img src={ingredient.image} alt={ingredient.name} />
       </div>
@@ -29,17 +34,9 @@ export default function IngredientCard ({ ingredient }) {
 
 IngredientCard.propTypes = {
   ingredient: PropTypes.shape({
-    _id: PropTypes.string,
     name: PropTypes.string,
-    type: PropTypes.string,
-    proteins: PropTypes.number,
-    fat: PropTypes.number,
-    carbohydrates: PropTypes.number,
-    calories: PropTypes.number,
     price: PropTypes.number,
-    image: PropTypes.string,
-    image_mobile: PropTypes.string,
-    image_large: PropTypes.string,
-    __v: PropTypes.number
-  })
+    image: PropTypes.string
+  }),
+  counter: PropTypes.number
 }

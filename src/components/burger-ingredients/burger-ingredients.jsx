@@ -17,9 +17,9 @@ export default function BurgerIngredients ({ data }) {
   return(
     <div className={`${styles.root} pl-5 pt-10`}>
       <div className={styles.label}>
-        <p className='text text_type_main-large'>
+        <h1 className='text text_type_main-large'>
           Соберите бургер
-        </p>
+        </h1>
       </div>
 
       <div className={`${styles.tabs} mt-5`}>
