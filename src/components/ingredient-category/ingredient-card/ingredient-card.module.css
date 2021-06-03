@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  width: 272px;
+}
+
+.counter {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+}
+
+.label {
+  text-align: center;
+}

@@ -1,0 +1,42 @@
+.root {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: 10px;
+  width: 600px;
+  height: calc(100vh - 200px)
+}
+
+.scrollableList {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  gap: 10px;
+}
+
+.scrollableList::-webkit-scrollbar {
+  width: 8px;
+}
+.scrollableList::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+.scrollableList::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.confirmBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.totalPrice {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.totalPrice svg {
+  height: 33px;
+  width: 33px;
+}

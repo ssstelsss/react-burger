@@ -1,0 +1,27 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #1C1C21;
+  composes: pt-4 pb-4 from global;
+}
+
+.productOptions, .logo, .profileOptions  {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.profileOptions {
+  justify-content: flex-end;
+}
+
+.content {
+  display: flex;
+  width: 1240px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
