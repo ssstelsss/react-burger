@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './ingredient-card.module.css'
 
-export default function IngredientCard ({ ingredient, count }) {
+export default function IngredientCard ({ ingredient, count, onSelect }) {
 
   return(
-    <div className={`${styles.root} mt-6`}>
+    <div className={`${styles.root} mt-6`} onClick={() => onSelect(ingredient)}>
       {count &&
         <div className={styles.counter}>
           <Counter count={count} size='default' />
@@ -38,5 +38,6 @@ IngredientCard.propTypes = {
     price: PropTypes.number,
     image: PropTypes.string
   }),
-  counter: PropTypes.number
+  count: PropTypes.number,
+  onSelect: PropTypes.func
 }
