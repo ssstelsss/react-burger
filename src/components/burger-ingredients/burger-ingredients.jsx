@@ -33,9 +33,9 @@ export default function BurgerIngredients ({ data }) {
       </div>
 
       <div className={`${styles.content} mt-10`}>
-        <IngredientCategory data={bunsData} titile={'Булки'} />
-        <IngredientCategory data={sauceData} titile={'Соусы'} />
-        <IngredientCategory data={mainData} titile={'Начинки'} />
+        <IngredientCategory data={bunsData} title={'Булки'} />
+        <IngredientCategory data={sauceData} title={'Соусы'} />
+        <IngredientCategory data={mainData} title={'Начинки'} />
       </div>
     </div>
   )

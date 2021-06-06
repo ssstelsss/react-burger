@@ -12,7 +12,12 @@ export default function App () {
   
   useEffect(() => {
     fetch(GET_INGREDIENTS_URL)
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        return Promise.reject(response.status)
+      })
       .then(data => setIngredients(data.data))
       .catch(err => setError(CODES.SERVER_ERR))
   }, [])
