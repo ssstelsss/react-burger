@@ -9,6 +9,7 @@
 
 .scrollableList {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   overflow-y: scroll;
   gap: 10px;
@@ -39,4 +40,9 @@
 .totalPrice svg {
   height: 33px;
   width: 33px;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
 }

@@ -1,32 +1,37 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import IngredientCard from './ingredient-card/ingredient-card'
 import Modal from '../modal/modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
+import { useSelector, useDispatch } from 'react-redux'
+import { removeCurrentIngredient } from '../../services/slices/currentIngredientSlice'
 import styles from './ingredient-category.module.css'
 
-export default function IngredientCategory ({ data, title }) {
-  const [currentIngredient, setCurrentIngredient] = useState()
+function IngredientCategoryComponent ({ data, title }, ref) {
+  const dispatch = useDispatch()
+  const currentIngredient = useSelector(store => store.currentIngredient)
 
   return(
     <div className={'pb-10'}>
-      <section className={styles.label}>
+      <section ref={ref} className={styles.label}>
         <p className='text text_type_main-medium'>
           {title}
         </p>
       </section>
 
       <div className={styles.elements}>
-        {data.map(ingredient => <IngredientCard key={ingredient._id} ingredient={ingredient} count={1} onSelect={setCurrentIngredient} />)}
+        {data.map(ingredient => <IngredientCard key={ingredient._id} ingredient={ingredient} count={1} />)}
       </div>
       {currentIngredient && 
-        <Modal header={'Детали ингредиента'} onClose={() => setCurrentIngredient()}>
+        <Modal header={'Детали ингредиента'} onClose={() => dispatch(removeCurrentIngredient())}>
           <IngredientDetails ingredient={currentIngredient}/>
         </Modal>
       }
     </div>
   )
 }
+
+const IngredientCategory = React.forwardRef(IngredientCategoryComponent)
 
 IngredientCategory.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
@@ -36,3 +41,5 @@ IngredientCategory.propTypes = {
   })),
   titile: PropTypes.string
 }
+
+export default IngredientCategory

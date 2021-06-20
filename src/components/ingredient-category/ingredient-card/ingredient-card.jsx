@@ -1,13 +1,36 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentIngredient } from '../../../services/slices/currentIngredientSlice'
+import { useDrag } from 'react-dnd';
 import styles from './ingredient-card.module.css'
 
-export default function IngredientCard ({ ingredient, count, onSelect }) {
+export default function IngredientCard ({ ingredient }) {
+  const dispatch = useDispatch()
 
+  const [{ opacity }, ref] = useDrag({
+    type: 'ingredients',
+    item: ingredient,
+    collect: monitor => ({
+      opacity: monitor.isDragging() ? 0.5 : 1
+    })
+  })
+
+  const count = useSelector(store => {
+    if (ingredient.type === 'bun') {
+      return store.burgerConstructor.bun?._id === ingredient._id && 1
+    } else {
+      return store.burgerConstructor.items.filter(item => item._id === ingredient._id).length
+    }
+  })
+
+  function onSelect () {
+    dispatch(setCurrentIngredient(ingredient))
+  }
   return(
-    <div className={`${styles.root} mt-6`} onClick={() => onSelect(ingredient)}>
-      {count &&
+    <div ref={ref} className={`${styles.root} mt-6`} onClick={onSelect} style={{opacity}}>
+      {!!count &&
         <div className={styles.counter}>
           <Counter count={count} size='default' />
         </div>
@@ -37,7 +60,5 @@ IngredientCard.propTypes = {
     name: PropTypes.string,
     price: PropTypes.number,
     image: PropTypes.string
-  }),
-  count: PropTypes.number,
-  onSelect: PropTypes.func
+  })
 }
