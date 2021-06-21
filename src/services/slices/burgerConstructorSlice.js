@@ -29,9 +29,16 @@ const constructorSlice = createSlice({
       const temp = state.items[firstIndex]
       state.items[firstIndex] = state.items[secondIndex]
       state.items[secondIndex] = temp
+    },
+    cleanConstructor: (state) => {
+      return {
+        bun: null,
+        items: [],
+        totalPrice: 0
+      }
     }
   }
 })
 
 export default constructorSlice.reducer
-export const { addIngredient, removeIngredientByIndex, setBun, swapItems } = constructorSlice.actions
+export const { addIngredient, removeIngredientByIndex, setBun, swapItems, cleanConstructor } = constructorSlice.actions

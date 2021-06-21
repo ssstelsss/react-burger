@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { SET_ORDER_URL } from '../../utils/constants'
 import { setError } from './appSlice'
+import { cleanConstructor } from './burgerConstructorSlice'
 import { CODES } from '../../utils/errors'
 
 const orderSlice = createSlice({
@@ -57,6 +58,7 @@ export const setOrder = ingredients => dispatch => {
     })
     .then(data => {
       dispatch(orderSuccess(data))
+      dispatch(cleanConstructor())
     })
     .catch(err => {
       dispatch(orderError())

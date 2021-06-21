@@ -39,6 +39,23 @@ export default function BurgerIngredients () {
     }
   }
 
+  function scrollToTab (type) {
+    setCurrentTab(type)
+    switch (type) {
+      case 'Булки':
+        bunsRef.current.scrollIntoView({behavior: "smooth"})
+        break
+      case 'Соусы':
+        sauceRef.current.scrollIntoView({behavior: "smooth"})
+        break
+      case 'Начинки':
+        mainRef.current.scrollIntoView({behavior: "smooth"})
+        break
+      default:
+        console.error('Wrong tab name!!!')
+    }
+  }
+
   return(
     <div className={`${styles.root} pl-5 pt-10`}>
       <div className={styles.label}>
@@ -50,7 +67,7 @@ export default function BurgerIngredients () {
       <div className={`${styles.tabs} mt-5`}>
         {tabs.map(type => {
           return(
-            <Tab key={type} value={type} active={currentTab === type} onClick={(type) => null}>
+            <Tab key={type} value={type} active={currentTab === type} onClick={(type) => scrollToTab(type)}>
               {type}
             </Tab>
           )
