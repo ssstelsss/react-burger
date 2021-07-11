@@ -16,6 +16,10 @@
   margin-top: 60px;
 }
 
+.imgBlock:hover {
+  cursor: pointer;
+}
+
 .imgBlock > img {
   width: 120px;
   height: 120px;

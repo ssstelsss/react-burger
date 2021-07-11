@@ -8,7 +8,7 @@ export default function ModalHeader ({ children, onClose }) {
   return(
     <div className={styles.root}>
       <span className='text text_type_main-large'>{children}</span>
-      <div onClick={onClose}>
+      <div className={styles.closeIcon} onClick={onClose}>
         <CloseIcon type='secondary' />
       </div>
     </div>

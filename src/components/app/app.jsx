@@ -1,33 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import AppHeader from '../app-header/app-header'
 import Constructor from '../constructor/constructor'
-import { GET_INGREDIENTS_URL } from '../../utils/constants'
-import { CODES } from '../../utils/errors'
 import Error from '../error/error'
+import { useDispatch, useSelector } from 'react-redux'
+import { getItems } from '../../services/slices/ingredientsSlice'
 
 export default function App () {
-  const [ingredients, setIngredients] = useState([])
-  const [error, setError] = useState();
-  
-  
+  const error = useSelector(store => store.app.error);
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    fetch(GET_INGREDIENTS_URL)
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        }
-        return Promise.reject(response.status)
-      })
-      .then(data => setIngredients(data.data))
-      .catch(err => setError(CODES.SERVER_ERR))
-  }, [])
+    dispatch(getItems())
+  }, [dispatch])
 
   return (
     <div>
       <AppHeader/>
       {error
         ? <Error code={error}/>
-        : <Constructor ingredients={ingredients}/>
+        : <Constructor/>
       }
     </div>
   );
