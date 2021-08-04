@@ -1,18 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import IngredientCard from './ingredient-card/ingredient-card'
-import Modal from '../modal/modal'
-import { useHistory } from 'react-router-dom'
-import IngredientDetails from '../ingredient-details/ingredient-details'
-import { useSelector, useDispatch } from 'react-redux'
-import { removeCurrentIngredient } from '../../services/slices/currentIngredientSlice'
 import styles from './ingredient-category.module.css'
 
 function IngredientCategoryComponent({ data, title }, ref) {
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const currentIngredient = useSelector(store => store.currentIngredient)
-
   return (
     <div className={'pb-10'}>
       <section ref={ref} className={styles.label}>
@@ -28,18 +19,6 @@ function IngredientCategoryComponent({ data, title }, ref) {
           />
         ))}
       </div>
-      {currentIngredient && (
-        <Modal
-          header={'Детали ингредиента'}
-          onClose={() => {
-            dispatch(removeCurrentIngredient())
-            history.location.pathname !== '/' &&
-              history.replace({ pathname: '/' })
-          }}
-        >
-          <IngredientDetails ingredient={currentIngredient} />
-        </Modal>
-      )}
     </div>
   )
 }

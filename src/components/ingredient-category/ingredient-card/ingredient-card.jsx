@@ -4,7 +4,7 @@ import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCurrentIngredient } from '../../../services/slices/currentIngredientSlice'
 import { useDrag } from 'react-dnd'
@@ -13,6 +13,7 @@ import styles from './ingredient-card.module.css'
 export default function IngredientCard({ ingredient }) {
   const dispatch = useDispatch()
   const history = useHistory()
+  const location = useLocation()
 
   const [{ opacity }, ref] = useDrag({
     type: 'ingredients',
@@ -34,11 +35,11 @@ export default function IngredientCard({ ingredient }) {
 
   function onSelect() {
     dispatch(setCurrentIngredient(ingredient))
-    const location = {
+    const _location = {
       pathname: `/ingredients/${ingredient._id}`,
-      state: { withClick: true }
+      state: { background: location  }
     }
-    history.replace(location)
+    history.push(_location)
   }
   return (
     <div
