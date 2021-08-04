@@ -1,43 +1,48 @@
-import React, { useState } from 'react'
-import { BurgerIcon, ListIcon, ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-components'
+import React from 'react'
+import {
+  BurgerIcon,
+  ListIcon,
+  ProfileIcon,
+  Logo,
+} from '@ya.praktikum/react-developer-burger-ui-components'
+import { useLocation } from 'react-router-dom'
 import MenuItem from '../menu-item/menu-item'
 import styles from './app-header.module.css'
 
-const ITEMS = {
-  constructor: 'constructor',
-  orders: 'orders',
-  profile: 'profile'
-}
+export default function AppHeader() {
+  const { pathname } = useLocation()
 
-export default function AppHeader () {
-
-  const [activeItem, setActiveItem] = useState(ITEMS.constructor)
-
-
-  return(
+  return (
     <header className={styles.root}>
       <nav className={`${styles.content}`}>
         <div className={styles.productOptions}>
-          <MenuItem icon={<BurgerIcon/>} isActive={activeItem === ITEMS.constructor} onClick={() => setActiveItem(ITEMS.constructor)}>
+          <MenuItem
+            icon={<BurgerIcon />}
+            link={'/'}
+            isActive={pathname === '/'}
+          >
             Конструктор
           </MenuItem>
           <div className='ml-2'>
-            <MenuItem icon={<ListIcon/>} isActive={activeItem === ITEMS.orders } onClick={() => setActiveItem(ITEMS.orders)}>
+            <MenuItem icon={<ListIcon />} link={'/feed'} isActive={pathname === '/feed'}>
               Лента заказов
             </MenuItem>
           </div>
         </div>
 
         <div className={styles.logo}>
-          <Logo/>
+          <Logo />
         </div>
-        
+
         <div className={styles.profileOptions}>
-          <MenuItem icon={<ProfileIcon/>} isActive={activeItem === ITEMS.profile} onClick={() => setActiveItem(ITEMS.profile)}>
+          <MenuItem
+            icon={<ProfileIcon />}
+            link={'/profile'}
+            isActive={pathname === '/profile'}
+          >
             Личный кабинет
           </MenuItem>
         </div>
-      
       </nav>
     </header>
   )

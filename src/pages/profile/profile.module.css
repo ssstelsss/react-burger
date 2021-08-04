@@ -1,0 +1,14 @@
+.root {
+  margin: 120px auto;
+  display: flex;
+  flex-direction: row;
+  width: 860px;
+  gap: 90px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  /* gap: 20px; */
+}
+

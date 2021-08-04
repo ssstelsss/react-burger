@@ -1,0 +1,11 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}

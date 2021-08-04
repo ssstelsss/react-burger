@@ -1,0 +1,9 @@
+.link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  composes: p-5 from global;
+}
