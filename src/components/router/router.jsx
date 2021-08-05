@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Constructor from '../constructor/constructor'
 import {
   Login,
@@ -20,12 +20,19 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export default function Router() {
   const dispatch = useDispatch()
+  const location = useLocation()
   const history = useHistory()
 
   const currentIngredient = useSelector(store => store.currentIngredient)
 
-  const location = useLocation()
-  let background = location.state?.background
+  const background = location.state?.background
+
+  useEffect(() => {
+    return background && history.replace({
+      pathname: location.pathname,
+      state: undefined
+    })
+  }, [])
 
   return (
     <>

@@ -25,7 +25,7 @@ export default function BurgerConstructor() {
   const isOrderModalOpen = useSelector(
     store => store.orderModal.isOrderModalOpen
   )
-  let { isLogined } = useSelector(store => store.user)
+  const { isLogined } = useSelector(store => store.user)
   const history = useHistory()
 
   const [{ isHover }, dropTarget] = useDrop({

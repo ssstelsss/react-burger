@@ -29,7 +29,7 @@ export default function ResetPassword() {
     setForm(prev => ({ ...prev, [event.target.name]: event.target.value }))
   }
 
-  function saveNewPassword(event) {
+  function handleSubmit(event) {
     event.preventDefault()
     dispatch(resetPassword(form))
   }
@@ -40,9 +40,12 @@ export default function ResetPassword() {
 
   return (
     <div className={styles.root}>
-      <form className={styles.content}>
+      <div className={styles.content}>
         <Logo />
-        <div className={`${styles.formContainer} mt-20`}>
+        <form
+          className={`${styles.formContainer} mt-20`}
+          onSubmit={handleSubmit}
+        >
           <p className='text text_type_main-medium'>Восстановление пароля</p>
           <PasswordInput
             onChange={onChangeField}
@@ -60,12 +63,12 @@ export default function ResetPassword() {
             className='mt-5'
             type='primary'
             size='medium'
-            onClick={saveNewPassword}
+            onClick={handleSubmit}
           >
             Сохранить
           </Button>
-        </div>
-      </form>
+        </form>
+      </div>
       <div className={`${styles.footer} mt-20`}>
         <p className='text text_type_main-default text_color_inactive'>
           Вспомнили пароль? <Link to='/login'>Войти</Link>

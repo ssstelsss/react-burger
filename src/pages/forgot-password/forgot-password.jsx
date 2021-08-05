@@ -25,13 +25,14 @@ export default function ForgotPassword() {
     if (forgotPasswordSuccess && email) {
       const location = {
         pathname: '/reset-password',
-        state: { fromForgotPassword: true }
+        state: { fromForgotPassword: true },
       }
       history.replace(location)
     }
   }, [forgotPasswordSuccess, history, email])
 
-  function resetPassword() {
+  function handleSubmit(event) {
+    event.preventDefault()
     if (email) {
       dispatch(forgotPassword({ email }))
     }
@@ -41,28 +42,27 @@ export default function ForgotPassword() {
     <div className={styles.root}>
       <div className={styles.content}>
         <Logo />
-        <div className={`${styles.formContainer} mt-20`}>
+        <form
+          className={`${styles.formContainer} mt-20`}
+          onSubmit={handleSubmit}
+        >
           <p className='text text_type_main-medium'>Восстановление пароля</p>
-          <div className='mt-5'>
-            <Input
-              type='email'
-              placeholder='Укажите e-mail'
-              name='email'
-              value={email}
-              onChange={onChangeEmail}
-            />
-          </div>
-          <div className='mt-5'>
-            <Button
-              className='mt-5'
-              type='primary'
-              size='medium'
-              onClick={resetPassword}
-            >
-              Восстановить
-            </Button>
-          </div>
-        </div>
+          <Input
+            type='email'
+            placeholder='Укажите e-mail'
+            name='email'
+            value={email}
+            onChange={onChangeEmail}
+          />
+          <Button
+            className='mt-5'
+            type='primary'
+            size='medium'
+            onClick={handleSubmit}
+          >
+            Восстановить
+          </Button>
+        </form>
         <div className={`${styles.footer} mt-20`}>
           <p className='text text_type_main-default text_color_inactive'>
             Вспомнили пароль? <Link to='/login'>Войти</Link>

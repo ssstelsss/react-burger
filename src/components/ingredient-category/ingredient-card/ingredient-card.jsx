@@ -25,7 +25,7 @@ export default function IngredientCard({ ingredient }) {
 
   const count = useSelector(store => {
     if (ingredient.type === 'bun') {
-      return store.burgerConstructor.bun?._id === ingredient._id && 1
+      return store.burgerConstructor.bun?._id === ingredient._id && 2
     } else {
       return store.burgerConstructor.items.filter(
         item => item._id === ingredient._id

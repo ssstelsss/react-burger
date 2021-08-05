@@ -5,7 +5,7 @@ import { getUserData } from '../../services/slices/getUserDataSlice'
 
 export function ProtectedRoute({ children, forLoggined = true, redirectTo='/login', ...rest }) {
   const dispatch = useDispatch()
-  let { isLogined } = useSelector(store => store.user)
+  const { isLogined } = useSelector(store => store.user)
   const [isUserLoaded, setUserLoaded] = useState(false)
 
   const init = useCallback(async () => {

@@ -5,7 +5,7 @@ import {
   ProfileIcon,
   Logo,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import MenuItem from '../menu-item/menu-item'
 import styles from './app-header.module.css'
 
@@ -24,14 +24,20 @@ export default function AppHeader() {
             Конструктор
           </MenuItem>
           <div className='ml-2'>
-            <MenuItem icon={<ListIcon />} link={'/feed'} isActive={pathname === '/feed'}>
+            <MenuItem
+              icon={<ListIcon />}
+              link={'/feed'}
+              isActive={pathname === '/feed'}
+            >
               Лента заказов
             </MenuItem>
           </div>
         </div>
 
         <div className={styles.logo}>
-          <Logo />
+          <Link to={'/'}>
+            <Logo />
+          </Link>
         </div>
 
         <div className={styles.profileOptions}>

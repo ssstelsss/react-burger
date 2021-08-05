@@ -10,10 +10,11 @@ import { registration } from '../../services/slices/registrationSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './register.module.css'
 
-
 export default function Register() {
   const dispatch = useDispatch()
-  const isRegistrationSuccess = useSelector(store => store.registration.registrationSuccess)
+  const isRegistrationSuccess = useSelector(
+    store => store.registration.registrationSuccess
+  )
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -24,7 +25,7 @@ export default function Register() {
     setForm(prev => ({ ...prev, [event.target.name]: event.target.value }))
   }
 
-  function register(event) {
+  function handleSubmit(event) {
     event.preventDefault()
     dispatch(registration(form))
   }
@@ -41,10 +42,13 @@ export default function Register() {
 
   return (
     <div className={styles.root}>
-      <form className={styles.content}>
+      <div className={styles.content}>
         <Logo />
-        <p className='text text_type_main-medium mt-20'>Регистрация</p>
-        <div className='mt-5'>
+        <form
+          className={`${styles.formContainer} mt-20`}
+          onSubmit={handleSubmit}
+        >
+          <p className='text text_type_main-medium mt-20'>Регистрация</p>
           <Input
             type='text'
             placeholder='Имя'
@@ -52,8 +56,6 @@ export default function Register() {
             value={form.name}
             onChange={onChangeField}
           />
-        </div>
-        <div className='mt-5'>
           <Input
             type='email'
             placeholder='E-mail'
@@ -61,26 +63,22 @@ export default function Register() {
             value={form.email}
             onChange={onChangeField}
           />
-        </div>
-        <div className='mt-5'>
           <PasswordInput
             onChange={onChangeField}
             value={form.password}
             name={'password'}
           />
-        </div>
-        <div className='mt-5'>
           <Button
             className='mt-5'
             type='primary'
             size='medium'
-            onClick={register}
+            onClick={handleSubmit}
           >
             Зарегистрироваться
           </Button>
-        </div>
-      </form>
-      <div className={`${styles.formContainer} mt-20`}></div>
+        </form>
+      </div>
+
       <div className={`${styles.footer} mt-20`}>
         <p className='text text_type_main-default text_color_inactive'>
           Уже зарегистрированы? <Link to='/login'>Войти</Link>

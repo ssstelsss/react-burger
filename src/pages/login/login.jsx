@@ -38,7 +38,7 @@ export default function Login() {
     setForm(prev => ({ ...prev, [event.target.name]: event.target.value }))
   }
 
-  function onLogin(event) {
+  function handleSubmit(event) {
     event.preventDefault()
     dispatch(login(form))
   }
@@ -53,38 +53,35 @@ export default function Login() {
 
   return (
     <div className={styles.root}>
-      <form className={styles.content}>
+      <div className={styles.content}>
         <Logo />
-        <div className={`${styles.formContainer} mt-20`}>
+        <form
+          className={`${styles.formContainer} mt-20`}
+          onSubmit={handleSubmit}
+        >
           <p className='text text_type_main-medium'>Вход</p>
-          <div className='mt-5'>
-            <Input
-              type='email'
-              placeholder='E-mail'
-              name='email'
-              value={form.email}
-              onChange={onChangeField}
-            />
-          </div>
-          <div className='mt-5'>
-            <PasswordInput
-              onChange={onChangeField}
-              value={form.password}
-              name={'password'}
-            />
-          </div>
-          <div className='mt-5'>
-            <Button
-              className='mt-5'
-              type='primary'
-              size='medium'
-              onClick={onLogin}
-            >
-              Войти
-            </Button>
-          </div>
-        </div>
-      </form>
+          <Input
+            type='email'
+            placeholder='E-mail'
+            name='email'
+            value={form.email}
+            onChange={onChangeField}
+          />
+          <PasswordInput
+            onChange={onChangeField}
+            value={form.password}
+            name={'password'}
+          />
+          <Button
+            className='mt-5'
+            type='primary'
+            size='medium'
+            onClick={handleSubmit}
+          >
+            Войти
+          </Button>
+        </form>
+      </div>
       <div className={`${styles.footer} mt-20`}>
         <p className='text text_type_main-default text_color_inactive'>
           Вы - новый пользователь?{' '}
