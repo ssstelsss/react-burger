@@ -32,7 +32,7 @@ export default function BurgerIngredients () {
     const distances = [distToBuns, distToSouce, distToMain]
     const minElement = Math.min(...distances)
     const minIndex = distances.findIndex(el => el === minElement)
-    let newTab = tabs[minIndex]
+    const newTab = tabs[minIndex]
 
     if (newTab !== currentTab) {
       setCurrentTab(newTab)

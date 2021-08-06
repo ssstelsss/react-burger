@@ -2,7 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import { SET_ORDER_URL } from '../../utils/constants'
 import { setError } from './appSlice'
 import { cleanConstructor } from './burgerConstructorSlice'
+import { openOrderModal } from './orderModalSlice'
 import { CODES } from '../../utils/errors'
+import { fetchWithRefresh } from '../../utils/helpers'
+import { getCookie } from '../../utils/cookies'
 
 const orderSlice = createSlice({
   name: 'order',
@@ -10,7 +13,7 @@ const orderSlice = createSlice({
     result: {},
     orderRequest: false,
     orderSuccess: false,
-    orderError: false
+    orderError: false,
   },
   reducers: {
     orderSuccess: (state, action) => {
@@ -18,24 +21,24 @@ const orderSlice = createSlice({
         result: action.payload,
         orderRequest: false,
         orderError: false,
-        orderSuccess: true
+        orderSuccess: true,
       })
     },
-    orderRequest: (state) => {
+    orderRequest: state => {
       Object.assign(state, {
         orderRequest: true,
         orderError: false,
-        orderSuccess: false
+        orderSuccess: false,
       })
     },
-    orderError: (state) => {
+    orderError: state => {
       Object.assign(state, {
         orderRequest: false,
         orderError: true,
-        orderSuccess: false  
+        orderSuccess: false,
       })
-    }
-  }
+    },
+  },
 })
 
 export default orderSlice.reducer
@@ -43,21 +46,17 @@ export const { orderSuccess, orderRequest, orderError } = orderSlice.actions
 
 export const setOrder = ingredients => dispatch => {
   dispatch(orderRequest())
-  fetch(SET_ORDER_URL, {
+  fetchWithRefresh(SET_ORDER_URL, {
     method: 'POST',
-    body: JSON.stringify({ingredients}),
+    body: JSON.stringify({ ingredients }),
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+      authorization: getCookie('accessToken'),
+    },
   })
-    .then(response => {
-      if (response.ok) {
-        return response.json()
-      }
-      return Promise.reject(response.status)
-    })
     .then(data => {
       dispatch(orderSuccess(data))
+      dispatch(openOrderModal())
       dispatch(cleanConstructor())
     })
     .catch(err => {
