@@ -10,7 +10,7 @@ export default function Profile() {
   const { pathname } = useLocation()
   return (
     <div className={styles.root}>
-      <div className={styles.menu}>
+      <div className={`${styles.menu} mt-30`}>
         <ProfileLink to={'/profile'} isActive={pathname === '/profile'}>
           Профиль
         </ProfileLink>
@@ -25,14 +25,15 @@ export default function Profile() {
       <div className='content'>
         <Switch>
           <ProtectedRoute path='/profile' exact={true}>
-            <Main />
+            <div className='mt-30'>
+              <Main />
+            </div>
           </ProtectedRoute>
           <ProtectedRoute path='/profile/orders' exact={true}>
-            <Orders />
+            <div className='mt-9'>
+              <Orders />
+            </div>
           </ProtectedRoute>
-          {/* <Route path='/profile/orders/:id' exact={true}>
-              <CountryPage />
-            </Route> */}
         </Switch>
       </div>
     </div>

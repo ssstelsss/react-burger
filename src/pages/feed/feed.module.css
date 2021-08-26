@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 56px;
+  /* max-width: 1240px; */
+  height: calc(100vh - 150px);
+  
+}
+
+.orderListBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 608px;
+}

@@ -14,7 +14,12 @@ import {
   resetPasswordSlice,
   logoutSlice,
   orderModalSlice,
+  feedSlice,
+  currentOrderSlice,
 } from './slices'
+import { wsMiddleware } from './middlewares'
+
+const middlewares = [wsMiddleware()]
 
 const rootReducer = combineReducers({
   ingredients: ingredientsSlice,
@@ -31,8 +36,12 @@ const rootReducer = combineReducers({
   resetPassword: resetPasswordSlice,
   logout: logoutSlice,
   orderModal: orderModalSlice,
+  feed: feedSlice,
+  currentOrder: currentOrderSlice,
 })
 
 export const store = configureStore({
   reducer: rootReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(middlewares),
 })

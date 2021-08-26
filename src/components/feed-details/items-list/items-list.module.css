@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  overflow-y: auto;
+  padding-right: 8px;
+  gap: 20px;
+}
+
+.root::-webkit-scrollbar {
+  width: 8px;
+}
+.root::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+.root::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
