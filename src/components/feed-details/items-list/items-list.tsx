@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from '../../../services'
+import { IIngredient } from '../../../types'
 import Item from './item/item'
 import styles from './items-list.module.css'
 
@@ -7,29 +8,36 @@ interface IItemsListProps {
   ingredients: string[]
 }
 
+export interface IIngredientWithCount extends IIngredient {
+  count: number
+}
+
+interface IIngredientsGroup {
+  [key: string]: IIngredientWithCount
+}
+
 const ItemsList: FC<IItemsListProps> = ({ ingredients }) => {
-  const allIngredients = useSelector((store: any) => store.ingredients.items)
+  const allIngredients = useAppSelector(store => store.ingredients.items)
 
   const currentIngredients = ingredients.map(el =>
-    allIngredients.find((item: any) => item._id === el)
+    allIngredients.find(item => item._id === el)
   )
 
-  console.log('currentIngredients: ', currentIngredients)
-
-  const ingredientsGroup: { [key: string]: any } = {}
-  currentIngredients.forEach(
-    (item: { _id: string; price: number; name: string }) => {
-      if (ingredientsGroup[item._id]) {
-        ingredientsGroup[item._id].count += 1
+  const ingredientsGroup: IIngredientsGroup = {} as IIngredientsGroup
+  currentIngredients.forEach(item => {
+    if (item?._id) {
+      const key = item._id
+      if (ingredientsGroup[key]) {
+        ingredientsGroup[key].count += 1
       } else {
-        ingredientsGroup[item._id] = {
+        ingredientsGroup[key] = {
           count: 1,
           ...item,
         }
       }
     }
-  )
-  console.log('ingredientsGroup: ', ingredientsGroup)
+  })
+
   return (
     <div className={`${styles.root} mt-6`}>
       {Object.keys(ingredientsGroup).map((key: string) => (

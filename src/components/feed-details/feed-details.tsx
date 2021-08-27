@@ -1,11 +1,12 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import React, { FC } from 'react'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from '../../services'
+import { IFeedOrder } from '../../types'
 import styles from './feed-details.module.css'
 import ItemsList from './items-list/items-list'
 
 interface IFeedDetailsProps {
-  order: any
+  order: IFeedOrder
   withNumber?: boolean
 }
 
@@ -37,13 +38,12 @@ const getStatusItem = (status: string) => {
 const FeedDetails: FC<IFeedDetailsProps> = ({ order, withNumber }) => {
   const status = getStatusItem(order.status)
 
-  const allIngredients = useSelector((store: any) => store.ingredients.items)
+  const allIngredients = useAppSelector(store => store.ingredients.items)
 
-  const currentCost = order.ingredients.reduce(
-    (accumulator: number, el: any) =>
-      accumulator + allIngredients.find((item: any) => item._id === el).price,
-    0
-  )
+  const currentCost = order.ingredients.reduce((accumulator: number, el) => {
+    const newPrice = allIngredients.find(item => item._id === el)?.price || 0
+    return accumulator + newPrice
+  }, 0)
   return (
     <div className={`${styles.root}`}>
       {withNumber ? (

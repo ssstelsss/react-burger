@@ -1,6 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { IFeedOrder } from '../../types'
 
-const initialState = {
+interface IFeedSliceState {
+  total: string
+  totalToday: string
+  orders: IFeedOrder[]
+  wsConnected: boolean
+  wsLoading: boolean
+  wsError: boolean
+}
+
+const initialState: IFeedSliceState = {
   total: '',
   totalToday: '',
   orders: [],

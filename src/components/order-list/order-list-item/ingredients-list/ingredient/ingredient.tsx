@@ -1,11 +1,12 @@
 import React, { FC } from 'react'
+import { IIngredient } from '../../../../../types'
 import styles from './ingredient.module.css'
 
 type IIngredientProps = {
-  ingredient: any
+  ingredient: IIngredient
   isLast?: boolean
   restNumber?: number
-  style?: any
+  style?: React.CSSProperties
 }
 
 const Ingredient: FC<IIngredientProps> = ({

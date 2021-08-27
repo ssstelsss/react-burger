@@ -1,28 +1,28 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import React, { FC } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../../services'
 import { setCurrentOrder } from '../../../services/slices/currentOrderSlice'
+import { IFeedOrder } from '../../../types'
 import IngredientsList from './ingredients-list/ingredients-list'
 import styles from './order-list-item.module.css'
 
 type IOrderListItemProps = {
-  order: any
+  order: IFeedOrder
   fromOrderPage?: boolean
 }
 
 const OrderListItem: FC<IOrderListItemProps> = ({ order, fromOrderPage }) => {
-  const allIngredients = useSelector((store: any) => store.ingredients.items)
+  const allIngredients = useAppSelector(store => store.ingredients.items)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const history = useHistory()
   const location = useLocation()
 
-  const currentCost = order.ingredients.reduce(
-    (accumulator: number, el: any) =>
-      accumulator + allIngredients.find((item: any) => item._id === el).price,
-    0
-  )
+  const currentCost = order.ingredients.reduce((accumulator: number, el) => {
+    const newPrice = allIngredients.find(item => item._id === el)?.price || 0
+    return accumulator + newPrice
+  }, 0)
 
   function onSelect() {
     dispatch(setCurrentOrder(order))

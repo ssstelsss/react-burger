@@ -1,15 +1,15 @@
 import React, { FC } from 'react'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from '../../services'
 import styles from './feed-time-panel.module.css'
 
 const FeedTimePanel: FC = () => {
-  const feed = useSelector((store: any) => store.feed)
+  const feed = useAppSelector(store => store.feed)
 
   const doneOrders = feed.orders
-    .filter((item: any) => item.status === 'done')
+    .filter(item => item.status === 'done')
     .slice(0, 20)
   const inWorkOrders = feed.orders
-    .filter((item: any) => item.status === 'created')
+    .filter(item => item.status === 'created')
     .slice(0, 20)
 
   return (
@@ -18,7 +18,7 @@ const FeedTimePanel: FC = () => {
         <div className={styles.ready}>
           <span className='text text_type_main-medium'>Готовы:</span>
           <div className={styles.readyNumbers}>
-            {doneOrders.map((el: any) => (
+            {doneOrders.map(el => (
               <p key={el._id} className='text text_type_digits-default'>
                 {el.number}
               </p>
@@ -28,7 +28,7 @@ const FeedTimePanel: FC = () => {
         <div className={styles.inWork}>
           <span className='text text_type_main-medium'>В работе:</span>
           <div className={styles.inWorkNumbers}>
-            {inWorkOrders.map((el: any) => (
+            {inWorkOrders.map(el => (
               <p key={el._id} className='text text_type_digits-default'>
                 {el.number}
               </p>

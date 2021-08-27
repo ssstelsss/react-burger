@@ -1,17 +1,17 @@
 import React, { FC, useEffect } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import FeedDetails from '../../components/feed-details/feed-details'
 import { wsOpenConnection, wsClose } from '../../services/slices/feedSlice'
 import styles from './order.module.css'
+import { useAppDispatch, useAppSelector } from '../../services'
 
 const Order: FC = () => {
   const location = useLocation()
   const params = useParams<{ id: string }>()
-  const orders = useSelector((store: any) => store.feed.orders)
-  const order = orders.find((el: any) => el._id === params.id)
+  const orders = useAppSelector(store => store.feed.orders)
+  const order = orders.find(el => el._id === params.id)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (location.pathname.includes('/feed')) {

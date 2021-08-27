@@ -1,9 +1,10 @@
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import React, { FC } from 'react'
+import { IIngredientWithCount } from '../items-list'
 import styles from './item.module.css'
 
 interface IItemProps {
-  item: any
+  item: IIngredientWithCount
 }
 
 const Item: FC<IItemProps> = ({ item }) => {
@@ -17,9 +18,11 @@ const Item: FC<IItemProps> = ({ item }) => {
           <span className='text text_type_main-medium'>{item.name}</span>
         </div>
       </div>
-      
+
       <div className={styles.priceBlock}>
-        <span className='text text_type_digits-default mr-1'>{item.count} X {item.price}</span>
+        <span className='text text_type_digits-default mr-1'>
+          {item.count} X {item.price}
+        </span>
         <CurrencyIcon type='primary' />
       </div>
     </div>

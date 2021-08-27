@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
-import { useSelector } from 'react-redux'
+import { useAppSelector } from '../../../../services'
+import { IIngredient } from '../../../../types'
 import Ingredient from './ingredient/ingredient'
 import styles from './ingredients-list.module.css'
 
@@ -8,10 +9,10 @@ interface IIngredientsListProps {
 }
 
 const IngredientsList: FC<IIngredientsListProps> = ({ ingredients }) => {
-  const allIngredients = useSelector((store: any) => store.ingredients.items)
+  const allIngredients = useAppSelector(store => store.ingredients.items)
 
-  const currentIngredients = ingredients.map(el =>
-    allIngredients.find((item: any) => item._id === el)
+  const currentIngredients = ingredients.map(
+    el => allIngredients.find(item => item._id === el) as IIngredient
   )
 
   const headItems = currentIngredients.slice(0, 5)
