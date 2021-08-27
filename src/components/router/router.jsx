@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Constructor from '../constructor/constructor'
 import {
   Login,
@@ -29,17 +29,9 @@ export default function Router() {
   const currentIngredient = useSelector(store => store.currentIngredient)
   const currentOrder = useSelector(store => store.currentOrder)
 
-  const background = location.state?.background
 
-  useEffect(() => {
-    return (
-      background &&
-      history.replace({
-        pathname: location.pathname,
-        state: undefined,
-      })
-    )
-  }, [])
+  const background = history.action === 'PUSH' && location.state && location.state.background
+
 
   return (
     <>

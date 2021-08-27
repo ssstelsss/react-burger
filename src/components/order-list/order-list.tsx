@@ -13,7 +13,7 @@ const OrderList: FC<IOrderListProps> = ({ fromOrderPage }) => {
   return (
     <div className={styles.root}>
       {orders.map((order: any) => (
-        <OrderListItem key={order._id} order={order} fromOrderPage />
+        <OrderListItem key={order._id} order={order} fromOrderPage={fromOrderPage} />
       ))}
     </div>
   )

@@ -14,7 +14,7 @@ const Order: FC = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (location.pathname === '/feed') {
+    if (location.pathname.includes('/feed')) {
       dispatch(
         wsOpenConnection({
           url: 'wss://norma.nomoreparties.space/orders/all',
