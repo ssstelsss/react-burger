@@ -24,8 +24,8 @@ const getUserDataSlice = createSlice({
     getUserDataSuccess: state => {
       Object.assign(state, {
         getUserDataRequest: false,
-        getUserDataSuccess: true,
         getUserDataError: false,
+        getUserDataSuccess: true,
       })
     },
     getUserDataRequest: state => {

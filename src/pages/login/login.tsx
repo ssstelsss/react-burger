@@ -21,17 +21,12 @@ const Login: FC = () => {
   const dispatch = useAppDispatch()
   const history = useHistory<IUseHistory>()
 
-  const [isUserLoaded, setUserLoaded] = useState(false)
+  const { getUserDataRequest } = useAppSelector(store => store.getUserData)
   const user = useAppSelector(store => store.user)
 
-  const init = useCallback(async () => {
-    dispatch(getUserData())
-    setUserLoaded(true)
-  }, [dispatch])
-
   useEffect(() => {
-    init()
-  }, [init])
+    dispatch(getUserData())
+  }, [dispatch])
 
   const [form, setForm] = useState({
     email: '',
@@ -53,7 +48,7 @@ const Login: FC = () => {
     return <Redirect to={from || '/'} />
   }
 
-  if (!isUserLoaded) {
+  if (getUserDataRequest) {
     return null
   }
 

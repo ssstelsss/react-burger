@@ -71,7 +71,7 @@ export const registration =
         return Promise.reject(response.status)
       })
       .then(data => {
-        setCookie('accessToken', data.accessToken)
+        setCookie('accessToken', data.accessToken, { path: '/' })
         localStorage.setItem('refreshToken', data.refreshToken)
         dispatch(registrationSuccess())
         dispatch(setUserData(data.user))

@@ -72,9 +72,9 @@ export default function Router() {
         <ProtectedRoute path='/profile/orders/:id' exact={true}>
           <Order />
         </ProtectedRoute>
-        <ProtectedRoute path='/profile'>
+        <Route path='/profile'>
           <Profile />
-        </ProtectedRoute>
+        </Route>
         <Route path='/feed' exact={true}>
           <Feed />
         </Route>

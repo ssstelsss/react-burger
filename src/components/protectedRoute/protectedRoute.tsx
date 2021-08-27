@@ -1,5 +1,5 @@
 import { Redirect, Route, RouteProps } from 'react-router-dom'
-import { useEffect, useState, useCallback, FC } from 'react'
+import { useEffect, FC } from 'react'
 import { getUserData } from '../../services/slices/getUserDataSlice'
 import { useAppDispatch, useAppSelector } from '../../services'
 
@@ -16,18 +16,13 @@ const ProtectedRoute: FC<IProtectedRouteProps> = ({
 }) => {
   const dispatch = useAppDispatch()
   const { isLogined } = useAppSelector(store => store.user)
-  const [isUserLoaded, setUserLoaded] = useState(false)
-
-  const init = useCallback(async () => {
-    dispatch(getUserData())
-    setUserLoaded(true)
-  }, [dispatch])
+  const getUserDataRequest = useAppSelector(store => store.getUserData.getUserDataRequest)
 
   useEffect(() => {
-    init()
-  }, [init])
+    dispatch(getUserData())
+  }, [dispatch])
 
-  if (!isUserLoaded) {
+  if (getUserDataRequest) {
     return null
   }
 

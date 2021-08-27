@@ -68,7 +68,7 @@ export const login = (params: ILoginSliceParams) => (dispatch: AppDispatch) => {
       return Promise.reject(response.status)
     })
     .then(data => {
-      setCookie('accessToken', data.accessToken)
+      setCookie('accessToken', data.accessToken, { path: '/' })
       localStorage.setItem('refreshToken', data.refreshToken)
       dispatch(loginSuccess())
       dispatch(setUserData(data.user))

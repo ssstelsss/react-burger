@@ -48,7 +48,6 @@ const feedSlice = createSlice({
       Object.assign(state, initialState)
     },
     wsRes: (state, action) => {
-      console.log('action.payload: ', action.payload)
       const { orders, success, total, totalToday } = action.payload
       if (!success) {
         Object.assign(state, {
