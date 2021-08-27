@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, FC } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import {
   Input,
   Logo,
