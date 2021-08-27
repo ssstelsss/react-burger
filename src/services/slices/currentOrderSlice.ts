@@ -1,17 +1,31 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IFeedOrder } from '../../types'
 
-const initialState: IFeedOrder = {} as IFeedOrder
+interface ICurrentOrderSliceState {
+  order: IFeedOrder
+  isOrder: boolean
+}
+
+const initialState: ICurrentOrderSliceState = {
+  order: {} as IFeedOrder,
+  isOrder: false,
+}
 
 const currentOrderSlice = createSlice({
   name: 'currentOrder',
   initialState,
   reducers: {
     setCurrentOrder: (state, action) => {
-      state = action.payload as IFeedOrder
+      Object.assign(state, {
+        order: action.payload,
+        isOrder: true,
+      })
     },
     removeCurrentOrder: state => {
-      state = {} as IFeedOrder
+      Object.assign(state, {
+        order: {} as IFeedOrder,
+        isOrder: false,
+      })
     },
   },
 })

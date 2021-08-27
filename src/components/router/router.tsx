@@ -104,31 +104,31 @@ export default function Router() {
             )}
           </Route>
           <Route path='/feed/:id' exact={true}>
-            {currentOrder && (
+            {currentOrder.isOrder && (
               <Modal
-                header={`#${currentOrder.number}`}
+                header={`#${currentOrder.order.number}`}
                 onClose={() => {
                   dispatch(removeCurrentOrder())
                   history.goBack()
                 }}
               >
                 <div className='mt-5'>
-                  <FeedDetails order={currentOrder} />
+                  <FeedDetails order={currentOrder.order} />
                 </div>
               </Modal>
             )}
           </Route>
           <ProtectedRoute path='/profile/orders/:id' exact={true}>
-            {currentOrder && (
+            {currentOrder.isOrder && (
               <Modal
-                header={`#${currentOrder.number}`}
+                header={`#${currentOrder.order.number}`}
                 onClose={() => {
                   dispatch(removeCurrentOrder())
                   history.goBack()
                 }}
               >
                 <div className='mt-5'>
-                  <FeedDetails order={currentOrder} />
+                  <FeedDetails order={currentOrder.order} />
                 </div>
               </Modal>
             )}
