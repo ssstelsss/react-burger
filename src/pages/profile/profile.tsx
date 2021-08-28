@@ -29,7 +29,7 @@ const Profile: FC = () => {
               <Main />
             </div>
           </ProtectedRoute>
-          <ProtectedRoute path='/profile/orders' exact={true}>
+          <ProtectedRoute path='/profile/orders' exact={true} withoutVerify>
             <div className='mt-9'>
               <Orders />
             </div>

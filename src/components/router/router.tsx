@@ -118,7 +118,7 @@ export default function Router() {
               </Modal>
             )}
           </Route>
-          <ProtectedRoute path='/profile/orders/:id' exact={true}>
+          <Route path='/profile/orders/:id' exact={true}>
             {currentOrder.isOrder && (
               <Modal
                 header={`#${currentOrder.order.number}`}
@@ -132,7 +132,7 @@ export default function Router() {
                 </div>
               </Modal>
             )}
-          </ProtectedRoute>
+          </Route>
         </Switch>
       )}
     </>

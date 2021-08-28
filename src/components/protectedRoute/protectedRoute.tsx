@@ -6,12 +6,14 @@ import { useAppDispatch, useAppSelector } from '../../services'
 interface IProtectedRouteProps extends RouteProps {
   forLoggined?: boolean
   redirectTo?: string
+  withoutVerify? : boolean
 }
 
 const ProtectedRoute: FC<IProtectedRouteProps> = ({
   children,
   forLoggined = true,
   redirectTo = '/login',
+  withoutVerify,
   ...rest
 }) => {
   const dispatch = useAppDispatch()
@@ -22,7 +24,7 @@ const ProtectedRoute: FC<IProtectedRouteProps> = ({
     dispatch(getUserData())
   }, [dispatch])
 
-  if (getUserDataRequest) {
+  if (!withoutVerify && getUserDataRequest ) {
     return null
   }
 
