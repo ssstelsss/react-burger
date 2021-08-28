@@ -70,7 +70,7 @@ const BurgerConstructor: FC = () => {
   const isDisabledButton = !items.length || !bun
 
   return (
-    <div ref={dropTarget} className={`${styles.root} ml-10 mt-25`}>
+    <div ref={dropTarget} className={`${styles.root} ml-10 mt-25`} id='drop'>
       {bun && (
         <ConstructorItem
           type='top'

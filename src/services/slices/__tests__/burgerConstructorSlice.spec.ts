@@ -2,7 +2,6 @@ import reducer, {
   addIngredient,
   removeIngredientByIndex,
   setBun,
-  swapItems,
   cleanConstructor,
 } from '../burgerConstructorSlice'
 
@@ -48,7 +47,8 @@ const state = {
   ],
   totalPrice: 315,
 }
-const ingregient = {
+
+const testIngregient = {
   _id: '60d3b41abdacab0026a733cc',
   name: 'Соус Spicy-X',
   type: 'sauce',
@@ -63,52 +63,57 @@ const ingregient = {
   __v: 0,
 }
 
-describe('burgerConstructorSlice', () => {
-  it('initialState', () => expect(reducer(undefined, {})).toEqual(initialState))
+const testBun = {
+  _id: '60d3b41abdacab0026a733c6',
+  name: 'Краторная булка N-200i',
+  type: 'bun',
+  proteins: 80,
+  fat: 24,
+  carbohydrates: 53,
+  calories: 420,
+  price: 1255,
+  image: 'https://code.s3.yandex.net/react/code/bun-02.png',
+  image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
+  image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
+  __v: 0,
+}
 
-  it('Должен добавить булку', () => {
-    const payload = {
-      type: 'bun',
-      _id: 3000,
-      price: 3444,
-      image: 'src',
-      name: 'name',
-    }
-    const reduce = reducer(initialState, addIngredient(payload))
+describe('burgerConstructorSlice', () => {
+  it('initialState', () =>
+    expect(reducer(undefined, { type: '__TEST__' })).toEqual(initialState))
+
+  it('add bun', () => {
+    const reduce = reducer(initialState, setBun(testBun))
+
     const result = {
+      bun: { ...testBun, uniqId: reduce.bun?.uniqId },
       items: [],
-      sum: payload.price * 2,
-      bun: {
-        _id: payload._id,
-        price: payload.price,
-        type: payload.type,
-        name: payload.name,
-        image: payload.image,
-      },
+      totalPrice: testBun.price * 2,
+    }
+
+    expect(reduce).toEqual(result)
+  })
+
+  it('add ingredient', () => {
+    const reduce = reducer(initialState, addIngredient(testIngregient))
+    const result = {
+      bun: initialState.bun,
+      totalPrice: testIngregient.price,
+      items: [{ ...testIngregient, uniqId: reduce.items[0]?.uniqId }],
     }
     expect(reduce).toEqual(result)
   })
 
-  // it("Должен добавить item", () => {
-  //   const payload = {type:'sause', _id:3020, price:344, image: 'src', name:'name'}
-  //   const reduce = reducer(initialState, addIngredient(payload));
-  //   const result = {
-  //     bun: initialState.bun,
-  //      sum: payload.price,
-  //      items:{
-  //         _id: ???
-  //         id:payload._id,
-  //         price: payload.price,
-  //         type: payload.type,
-  //         name: payload.name,
-  //         image: payload.image,
-  //     }};
-  //   expect(reduce).toEqual(result);
-  // });
+  it('remove ingredienrt by index', () => {
+    const reduce = reducer(state, removeIngredientByIndex(0))
+    const result = { ...state, items: state.items.splice(1, 1), totalPrice: 15 }
 
-  it('Должен удалить item', () => {
-    const reduce = reducer(state, removeIngredient(ingregient))
-    const result = { ...state, items: state.items.splice(1, 1), sum: 1000 }
     expect(reduce).toEqual(result)
+  })
+
+  it('clean store', () => {
+    const reduce = reducer(state, cleanConstructor())
+
+    expect(reduce).toEqual(initialState)
   })
 })

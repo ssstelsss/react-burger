@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import OrderList from '../../../components/order-list/order-list'
 import { wsOpenConnection, wsClose } from '../../../services/slices/feedSlice'
 import styles from './orders.module.css'
 
-export default function Orders() {
+const Orders: FC = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -24,3 +24,5 @@ export default function Orders() {
     </div>
   )
 }
+
+export default Orders

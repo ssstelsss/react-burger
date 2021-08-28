@@ -51,6 +51,7 @@ const IngredientCard: FC<IIngredientCardProps> = ({ ingredient }) => {
       className={`${styles.root} mt-6`}
       onClick={onSelect}
       style={{ opacity }}
+      id = 'drug'
     >
       {!!count && (
         <div className={styles.counter}>
