@@ -1,0 +1,29 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.number {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+}
+
+.timeAndPriceBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
