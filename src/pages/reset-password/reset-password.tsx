@@ -29,8 +29,8 @@ const ResetPassword: FC = () => {
     setForm(prev => ({ ...prev, [event.target.name]: event.target.value }))
   }
 
-  function handleSubmit(event?: React.FormEvent) {
-    event?.preventDefault()
+  function handleSubmit(event: React.FormEvent) {
+    event.preventDefault()
     dispatch(resetPassword(form))
   }
 
@@ -60,7 +60,7 @@ const ResetPassword: FC = () => {
             onChange={onChangeField}
           />
           <div className='mt-5'>
-            <Button type='primary' size='medium' onClick={handleSubmit}>
+            <Button type='primary' size='medium'>
               Сохранить
             </Button>
           </div>

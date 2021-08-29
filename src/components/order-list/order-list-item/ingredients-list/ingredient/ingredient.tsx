@@ -23,7 +23,7 @@ const Ingredient: FC<IIngredientProps> = ({
         </div>
       ) : null}
       <div className={`${styles.imageWrapper} ${isLast ? styles.last : ''}`}>
-        <img src={ingredient.image_mobile} alt={ingredient.name} />
+        <img src={ingredient?.image_mobile} alt={ingredient?.name} />
       </div>
     </div>
   )

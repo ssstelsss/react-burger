@@ -31,8 +31,8 @@ const ForgotPassword: FC = () => {
     }
   }, [forgotPasswordSuccess, history, email])
 
-  function handleSubmit(event?: React.FormEvent) {
-    event?.preventDefault()
+  function handleSubmit(event: React.FormEvent) {
+    event.preventDefault()
     if (email) {
       dispatch(forgotPassword({ email }))
     }
@@ -55,7 +55,7 @@ const ForgotPassword: FC = () => {
             onChange={onChangeEmail}
           />
           <div className='mt-5'>
-            <Button type='primary' size='medium' onClick={() => handleSubmit()}>
+            <Button type='primary' size='medium'>
               Восстановить
             </Button>
           </div>

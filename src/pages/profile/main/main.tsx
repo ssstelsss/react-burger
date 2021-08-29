@@ -43,7 +43,8 @@ const Main: FC = () => {
     }))
   }
 
-  function save() {
+  function handleSubmit(event: React.FormEvent) {
+    event.preventDefault()
     dispatch(updateUserData(form))
   }
 
@@ -54,7 +55,7 @@ const Main: FC = () => {
 
   return (
     <div className={styles.root}>
-      <form className={styles.content}>
+      <form className={styles.content} onSubmit={handleSubmit}>
         <Input
           type='text'
           placeholder='Имя'
@@ -90,7 +91,7 @@ const Main: FC = () => {
             <Button type='secondary' size='medium' onClick={reset}>
               Отмена
             </Button>
-            <Button type='primary' size='medium' onClick={save}>
+            <Button type='primary' size='medium'>
               Сохранить
             </Button>
           </div>
